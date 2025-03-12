@@ -63,7 +63,7 @@ dependencies {
     implementation(project(":core:domain"))
 
     // Feature modules
-    implementation(project(":feature:itemlist"))
+    implementation(project(":features:itemlist"))
 
     // Android core libraries
     val coreKtxVersion = rootProject.extra["coreKtxVersion"]
