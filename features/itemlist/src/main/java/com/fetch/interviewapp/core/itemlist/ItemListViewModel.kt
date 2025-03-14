@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fetch.core.model.ItemGroup
 import com.fetch.interviewapp.core.domain.GetFilteredItemsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * UI state for the items list screen
@@ -22,7 +24,8 @@ data class ItemListUiState(
 /**
  * ViewModel for the items list screen
  */
-class ItemListViewModel(
+@HiltViewModel
+class ItemListViewModel @Inject constructor(
     private val getFilteredItemsUseCase: GetFilteredItemsUseCase
 ) : ViewModel() {
 

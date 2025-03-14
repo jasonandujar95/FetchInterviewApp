@@ -1,16 +1,14 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
-    namespace = "com.fetch.core.model"
+    namespace = "com.fetch.core.ui"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -24,19 +22,36 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
 dependencies {
-    // Kotlinx Serialization
-    val serializationVersion = rootProject.extra["serializationVersion"]
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+    // Compose
+    val composeVersion = rootProject.extra["composeVersion"]
+    implementation(platform("androidx.compose:compose-bom:$composeVersion"))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.material3)
+
+    // Core Android libraries
+    val coreKtxVersion = rootProject.extra["coreKtxVersion"]
+    implementation("androidx.core:core-ktx:$coreKtxVersion")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
